@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+typedef struct{
+    int jour;
+    int mois;
+    int annee;
+}date;
+typedef enum {particulier,entreprise}typeclient;
+typedef union{
+char CIN[100];
+char RC[100];
+}detail;
+typedef struct{
+    char nom[15];
+    char prenom[20];
+    int numcontrat;
+    char adresse[100];
+    typeclient type;
+    detail det;
+    date dateabonnement;
+}client;
+int main(){
+
+date A;
+typeclient B;
+detail C;
+client D[10];
+int n=0;
+int i;
+char choix[5];
+printf("===BIENVENUE AU SERVICE FIBRE OPTIQUE PLUS ===\n");
+
+                    do {
+printf("nous avons %d clients au moment\nvoulez-vous les joindre ?\n",n);
+scanf("%s",choix);
+if (strcmp(choix, "oui") == 0){
+        printf("bienvenue\n");
+        printf("combien de clients voulez-vous ajouter ?\n");
+        scanf("%d",&n);
+        for (i=1;i<=n;i++){
+                printf("entrer les informations du client %d\n",i);
+                printf("nom : ");
+                scanf(" %s",D[i].nom);
+                puts("prenom : ");
+                scanf(" %s",D[i].prenom);
+                puts("adresse de residence :\n");
+                scanf(" %[^\n]",D[i].adresse);
+                puts("numero du contrat : ");
+                scanf("%d",&D[i].numcontrat);
+                puts("si vous etes un particulier entrer 0, si une entreprise entrer 1");
+                scanf("%d",&D[i].type);
+                if (D[i].type==particulier){
+                    puts("entrer le CIN : ");
+                    scanf("%s",&D[i].det.CIN);}
+               else puts("entrer le numero du registre commerce : ");
+                   scanf("%s",&D[i].det.RC);
+               puts("enter la date d'abonnement :\n");
+               scanf("%d",&D[i].dateabonnement.jour);
+               scanf("%d",&D[i].dateabonnement.mois);
+               scanf("%d",&D[i].dateabonnement.annee);
+               printf("merci d'entrer les information du client %d\n",i);
+        }
+}
+else printf("dommage\n");
+}
+while(i!=100);
+    return 0;
+}
