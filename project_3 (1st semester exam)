@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+typedef enum {TOURIST,COMMERCIAL}categories;
+typedef struct{
+    char firstname [20];
+    char lastname [20];
+}owner;
+typedef struct{
+    categories category;
+    char brand[20];
+    int state;
+    int year;
+    owner owner1;
+}car;
+int main()
+{
+car A[10];
+int i,n,j=0,k=0;
+char answer[4];
+const char* categoryname[]={"TOURIST","COMMERCIAL"};
+printf("====WELCOME TO CAR THE OFFICIAL CAR IMPORT PLATFORM====\n\n");
+printf("Please enter how many cars you imported :");
+scanf("%d",&n);
+for(i=0;i<n;i++){
+    printf("enter first name of the car n=%d's owner :",i+1);
+    scanf(" %[^\n]",A[i].owner1.firstname);
+    printf("enter the last name of the car n=%d's owner :",i+1);
+    scanf(" %[^\n]",A[i].owner1.lastname);
+    printf("enter the car n%d's model :",i+1);
+    scanf(" %[^\n]",A[i].brand);
+    printf("enter the car n%d's destined state (ONLY ZIP CODE) :",i+1);
+    scanf("%d",&A[i].state);
+    printf("enter the car n%d's year :",i+1);
+    scanf("%d",&A[i].year);
+    printf("enter the car n%d's category (0 for tourist,1 for commercial) :",i+1);
+    scanf("%d",&A[i].category);
+    if(A[i].category==COMMERCIAL){
+        j++;
+    }
+    else k++;
+
+}
+printf("would you like to review your information before submitting it ? :");
+scanf("%s",answer);
+if(strcmp(answer,"yes")==0){
+    for(i=0;i<n;i++){
+        printf("here are the information of the car n=%d\n\n",i+1);
+        printf("owner's first name : %s\n",A[i].owner1.firstname);
+        printf("owner's last name : %s\n",A[i].owner1.lastname);
+        printf("car's model : %s\n",A[i].brand);
+        printf("car's state (zip code) : %d\n",A[i].state);
+        printf("car's year : %d\n",A[i].year);
+        printf("car's category : %s\n\n",categoryname[A[i].category]);
+    }
+    printf("the total number of tourist cars :%d\n",k);
+    printf("the total number of commercial cars :%d\n",j);
+    printf("thank you for your time ;)\n");
+}
+else printf("thank you for your time ;)\n");
+return 0;
+}
